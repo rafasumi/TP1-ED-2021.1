@@ -17,6 +17,6 @@ class Buffer {
   
   private:
     int size;
-    Node* front;
-    Node* back;
+    Node<std::string>* front;
+    Node<std::string>* back;
 };

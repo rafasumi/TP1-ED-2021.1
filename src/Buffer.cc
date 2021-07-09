@@ -3,7 +3,7 @@
 
 Buffer::Buffer() {
   size = 0;
-  front = new Node();
+  front = new Node<std::string>();
   back = front;
 }
 
@@ -21,7 +21,7 @@ bool Buffer::isEmpty() {
 }
 
 void Buffer::push(std::string data) {
-  Node* newNode = new Node();
+  Node<std::string>* newNode = new Node<std::string>();
   newNode->data = data;
 
   back->next = newNode;
@@ -34,7 +34,7 @@ std::string Buffer::popFront() {
   if (size == 0) throw "O buffer está vazio!";
 
   std::string auxString = front->next->data;
-  Node* auxNode = front;
+  Node<std::string>* auxNode = front;
   
   front = front->next;
   delete auxNode;
@@ -45,7 +45,7 @@ std::string Buffer::popFront() {
 }
 
 void Buffer::clear() {
-  Node* aux = front->next;
+  Node<std::string>* aux = front->next;
   while (aux != nullptr) {
     front->next = aux->next;
     delete aux;
@@ -59,7 +59,7 @@ void Buffer::clear() {
 void Buffer::print() {
   if (size == 0) throw "O buffer está vazio!";
 
-  Node* aux = front->next;
+  Node<std::string>* aux = front->next;
   while (aux != nullptr) {
     std::cout << aux->data << std::endl;
     aux = aux->next;

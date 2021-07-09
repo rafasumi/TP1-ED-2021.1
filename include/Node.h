@@ -1,11 +1,12 @@
-#include <string>
-
-class Node {
+template <class T> class Node {
   public:
-    Node();
+    Node() {
+      data = T();
+      next = nullptr;
+    }
 
   private:
-    std::string data;
+    T data;
     Node* next;
 
   friend class Buffer;
