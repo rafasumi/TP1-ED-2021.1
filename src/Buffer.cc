@@ -22,7 +22,7 @@ bool Buffer::isEmpty() {
 
 void Buffer::push(std::string data) {
   Node<std::string>* newNode = new Node<std::string>();
-  newNode->data = data;
+  newNode->item = data;
 
   back->next = newNode;
   back = newNode;
@@ -33,7 +33,7 @@ void Buffer::push(std::string data) {
 std::string Buffer::popFront() {
   if (size == 0) throw "O buffer está vazio!";
 
-  std::string auxString = front->next->data;
+  std::string auxString = front->next->item;
   Node<std::string>* auxNode = front;
   
   front = front->next;
@@ -42,6 +42,18 @@ std::string Buffer::popFront() {
   size--;
 
   return auxString;
+}
+
+void Buffer::jump(int pos) {
+  if (pos == 0) throw "Não é possível pular o item da posição 0";
+  
+  Node<std::string>* prev = position(pos-1);
+  Node<std::string>* node = prev->next;
+  prev->next = node->next;
+
+  Node<std::string>* aux = front->next;
+  front->next = node;
+  node->next = aux;
 }
 
 void Buffer::clear() {
@@ -61,7 +73,18 @@ void Buffer::print() {
 
   Node<std::string>* aux = front->next;
   while (aux != nullptr) {
-    std::cout << aux->data << std::endl;
+    std::cout << aux->item << std::endl;
     aux = aux->next;
   }
+}
+
+Node<std::string>* Buffer::position(int pos) {
+  if ((pos > size) || (pos < 0)) throw "Posição inválida!";
+
+  Node<std::string>* aux = front;
+  for (int i = 0; i <= pos; i++) {
+    aux = aux->next;
+  }
+
+  return aux;
 }

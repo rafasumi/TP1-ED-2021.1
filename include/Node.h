@@ -1,13 +1,19 @@
+#ifndef NODE
+#define NODE
+
 template <class T> class Node {
   public:
     Node() {
-      data = T();
+      item = T();
       next = nullptr;
     }
 
   private:
-    T data;
+    T item;
     Node* next;
 
   friend class Buffer;
+  friend class ServerList;
 };
+
+#endif
