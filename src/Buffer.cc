@@ -8,7 +8,10 @@ Buffer::Buffer() {
 }
 
 Buffer::~Buffer() {
-  clear();
+  if (size > 0) {
+    clear();
+  }
+
   delete front;
 }
 
@@ -28,6 +31,20 @@ void Buffer::push(std::string data) {
   back = newNode;
 
   size++;
+}
+
+void Buffer::append(Buffer* buffer) {
+  if (buffer->isEmpty()) throw "O buffer está vazio";
+
+  Node<std::string>* aux = buffer->front->next;
+  while (aux != nullptr) {
+    this->push(aux->item);
+    aux = aux->next;
+  }
+
+  this->size += buffer->getSize();
+
+  buffer->clear();
 }
 
 std::string Buffer::popFront() {

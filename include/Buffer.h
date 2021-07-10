@@ -12,6 +12,7 @@ class Buffer {
     bool isEmpty();
     
     void push(std::string data);
+    void append(Buffer* buffer);
     std::string popFront();
     void jump(int pos);
     void clear();
