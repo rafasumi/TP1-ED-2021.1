@@ -8,7 +8,6 @@ class Buffer {
     Buffer();
     ~Buffer();
     
-    int getSize();
     bool isEmpty();
     
     void push(std::string data);

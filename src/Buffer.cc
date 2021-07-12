@@ -15,10 +15,6 @@ Buffer::~Buffer() {
   delete front;
 }
 
-int Buffer::getSize() {
-  return size;
-}
-
 bool Buffer::isEmpty() {
   return size == 0;
 }
@@ -42,9 +38,7 @@ void Buffer::append(Buffer* buffer) {
     aux = aux->next;
   }
 
-  this->size += buffer->getSize();
-
-  buffer->clear();
+  this->size += buffer->size;
 }
 
 std::string Buffer::popFront() {
