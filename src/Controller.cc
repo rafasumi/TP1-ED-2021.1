@@ -2,6 +2,9 @@
 #include "Controller.h"
 
 Controller::Controller(int serverQty) {
+  if (serverQty <= 0) 
+    throw "Controller::Controller: Quantidade inválidade de servidores!";
+  
   for (int i = 0; i < serverQty; i++) {
     Buffer* buf = new Buffer();
     servers.push(buf);
@@ -24,7 +27,7 @@ void Controller::warn(int server, int pos) {
 
 void Controller::tran(int server1, int server2) {
   if (server1 == server2) 
-    throw "Impossível transferir de um servidor para ele mesmo";
+    throw "Controller::tran: Impossível transferir de um servidor para ele mesmo!";
 
   Buffer* buffer1 = servers.getBuffer(server1);
   Buffer* buffer2 = servers.getBuffer(server2);
@@ -49,4 +52,73 @@ void Controller::flush() {
   if (!history.isEmpty()) history.print();
 
   if (!servers.isEmpty()) servers.print();
+}
+
+void Controller::execute(std::string command) {
+  std::string* args = extractArgs(command);
+  std::string method = args[0];
+
+  if (method == "INFO") {
+    info(std::stoi(args[1]), args[2]);
+  } 
+  else if (method == "WARN") {
+    warn(std::stoi(args[1]), std::stoi(args[2]));
+  }
+  else if (method == "TRAN") {
+    tran(std::stoi(args[1]), std::stoi(args[2]));
+  }
+  else if (method == "ERRO") {
+    erro(std::stoi(args[1]));
+  }
+  else if (method == "SEND") {
+    send();
+  }
+  else if (method == "FLUSH") {
+    flush();
+  }
+  else {
+    delete[] args;
+    throw "Controller::execute: Input inválido!";
+  }
+
+  delete[] args;
+}
+
+std::string* Controller::extractArgs(std::string inputString) {
+  std::string* args = new std::string[3];
+
+  size_t i = 0;
+  size_t j = 0;
+  size_t aux = 0;
+  
+  size_t inputSize = inputString.size();
+  if (inputString[inputSize - 1] == '\r') inputSize--;
+  
+  for (i = 0; i < inputSize; i++) {
+    char c = inputString[i];
+    
+    if (c == ' ') {
+      args[aux] = inputString.substr(j, i - j);
+      aux++;
+      
+      j = i + 1;
+    } else if (c == '\"') {
+      i++;
+      j++;
+      
+      while(inputString[i] != '\"') { 
+        i++; 
+      }
+
+      args[aux] = inputString.substr(j, i - j);
+      aux++;
+    }
+  }
+
+  if (inputString[i-1] != '\"') {
+    args[aux] = inputString.substr(j, i - j);
+    aux++;
+  }
+
+  return args;
 }

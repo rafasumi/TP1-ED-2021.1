@@ -22,15 +22,11 @@ Buffer* ServerList::getBuffer(int server) {
 }
 
 void ServerList::push(Buffer* buffer) {
-  if (size == 0) {
-    first->item = buffer;
-  } else {
-    Node<Buffer*>* newNode = new Node<Buffer*>;
-    newNode->item = buffer;
-    
-    last->next = newNode;
-    last = newNode;
-  }
+  Node<Buffer*>* newNode = new Node<Buffer*>;
+  newNode->item = buffer;
+  
+  last->next = newNode;
+  last = newNode;
   
   size++;
 }
@@ -41,10 +37,12 @@ void ServerList::sendToServer(int server, std::string data) {
 }
 
 void ServerList::popAll(Buffer* destiny) {
-  Node<Buffer*>* aux = first;
+  Node<Buffer*>* aux = first->next;
   while (aux != nullptr) {
-    std::string data = aux->item->popFront();
-    destiny->push(data);
+    if (!aux->item->isEmpty()) {
+      std::string data = aux->item->popFront();
+      destiny->push(data);
+    }
     aux = aux->next;
   }
 }
@@ -58,13 +56,12 @@ void ServerList::clear() {
     aux = first->next;
   }
 
-  first->item->clear();
-  last = first;
   size = 0;
+  last = first;
 }
 
 void ServerList::print() {
-  Node<Buffer*>* aux = first;
+  Node<Buffer*>* aux = first->next;
   while (aux != nullptr) {
     if (!aux->item->isEmpty()) aux->item->print();
 
@@ -73,10 +70,10 @@ void ServerList::print() {
 }
 
 Node<Buffer*>* ServerList::getServer(int server) {
-  if ((server > size) || (server < 0)) throw "Posição inválida!";
+  if ((server >= size) || (server < 0)) throw "ServerList::getServer: Posição inválida!";
 
   Node<Buffer*>* aux = first;
-  for (int i = 0; i < server; i++) {
+  for (int i = 0; i <= server; i++) {
     aux = aux->next;
   }
 

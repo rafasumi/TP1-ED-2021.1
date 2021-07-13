@@ -10,6 +10,9 @@ class Controller {
     Controller(int serverQty);
     ~Controller();
 
+    void execute(std::string command);
+
+  private:
     void info(int server, std::string data);
     void warn(int server, int pos);
     void tran(int server1, int server2);
@@ -17,7 +20,8 @@ class Controller {
     void send();
     void flush();
 
-  private:
+    std::string* extractArgs(std::string inputString);
+
     Buffer history;
     ServerList servers;
 };
