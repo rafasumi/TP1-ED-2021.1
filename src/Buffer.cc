@@ -8,10 +8,7 @@ Buffer::Buffer() {
 }
 
 Buffer::~Buffer() {
-  if (size > 0) {
-    clear();
-  }
-
+  clear();
   delete front;
 }
 
@@ -37,8 +34,6 @@ void Buffer::append(Buffer* buffer) {
     this->push(aux->item);
     aux = aux->next;
   }
-
-  this->size += buffer->size;
 }
 
 std::string Buffer::popFront() {

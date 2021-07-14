@@ -9,11 +9,15 @@ Controller::Controller(int serverQty) {
     Buffer* buf = new Buffer();
     servers.push(buf);
   }
+
+  args = new std::string[3];
 }
 
 Controller::~Controller() {
   history.clear();
   servers.clear();
+
+  delete[] args;
 }
 
 void Controller::info(int server, std::string data) {
@@ -55,7 +59,7 @@ void Controller::flush() {
 }
 
 void Controller::execute(std::string command) {
-  std::string* args = extractArgs(command);
+  extractArgs(command);
   std::string method = args[0];
 
   if (method == "INFO") {
@@ -77,16 +81,11 @@ void Controller::execute(std::string command) {
     flush();
   }
   else {
-    delete[] args;
     throw "Controller::execute: Input inválido!";
   }
-
-  delete[] args;
 }
 
-std::string* Controller::extractArgs(std::string inputString) {
-  std::string* args = new std::string[3];
-
+void Controller::extractArgs(std::string inputString) {
   size_t i = 0;
   size_t j = 0;
   size_t aux = 0;
@@ -119,6 +118,4 @@ std::string* Controller::extractArgs(std::string inputString) {
     args[aux] = inputString.substr(j, i - j);
     aux++;
   }
-
-  return args;
 }

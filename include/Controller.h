@@ -20,10 +20,11 @@ class Controller {
     void send();
     void flush();
 
-    std::string* extractArgs(std::string inputString);
+    void extractArgs(std::string inputString);
 
     Buffer history;
     ServerList servers;
+    std::string* args;
 };
 
 #endif
