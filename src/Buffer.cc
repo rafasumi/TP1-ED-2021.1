@@ -51,7 +51,7 @@ std::string Buffer::popFront() {
 }
 
 void Buffer::jump(int pos) {
-  if (pos == 0) throw "Buffer::jump: Não é possível pular o item da posição 0!";
+  if ((pos >= size) || (pos <= 0)) throw "Buffer::jump: Posição inválida!";
   
   Node<std::string>* prev = position(pos-1);
   Node<std::string>* node = prev->next;

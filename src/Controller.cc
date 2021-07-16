@@ -3,7 +3,7 @@
 
 Controller::Controller(int serverQty) {
   if (serverQty <= 0) 
-    throw "Controller::Controller: Quantidade inválidade de servidores!";
+    throw "Controller::Controller: Quantidade inválida de de servidores!";
   
   for (int i = 0; i < serverQty; i++) {
     Buffer* buf = new Buffer();
