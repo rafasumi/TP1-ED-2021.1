@@ -1,7 +1,7 @@
 #include <iostream>
 #include <fstream>
+#include <string>
 #include "Controller.h"
-#include "ServerList.h"
 
 int main(int argc, char const* argv[]) {
   std::ifstream inputFile(argv[1]);
