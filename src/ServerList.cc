@@ -16,11 +16,6 @@ bool ServerList::isEmpty() {
   return size == 0;
 }
 
-Buffer* ServerList::getBuffer(int server) {
-  Node<Buffer*>* node = getServer(server);
-  return node->item;
-}
-
 void ServerList::push(Buffer* buffer) {
   Node<Buffer*>* newNode = new Node<Buffer*>(buffer);
   
@@ -66,6 +61,11 @@ void ServerList::print() {
 
     aux = aux->next;
   }
+}
+
+Buffer* ServerList::getBuffer(int server) {
+  Node<Buffer*>* node = getServer(server);
+  return node->item;
 }
 
 Node<Buffer*>* ServerList::getServer(int server) {

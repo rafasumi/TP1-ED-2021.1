@@ -3,6 +3,8 @@
 #include <string>
 #include "Controller.h"
 
+// Função main do programa. É responsável pela leitura do arquivo de input e pela chamada do controller
+// para a execução de comandos
 int main(int argc, char const* argv[]) {
   std::ifstream inputFile(argv[1]);
   std::string serverQty;
