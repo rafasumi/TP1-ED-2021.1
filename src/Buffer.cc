@@ -17,8 +17,7 @@ bool Buffer::isEmpty() {
 }
 
 void Buffer::push(std::string data) {
-  Node<std::string>* newNode = new Node<std::string>();
-  newNode->item = data;
+  Node<std::string>* newNode = new Node<std::string>(data);
 
   back->next = newNode;
   back = newNode;

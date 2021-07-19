@@ -3,7 +3,7 @@
 
 ServerList::ServerList() {
   size = 0;
-  first = new Node<Buffer*>;
+  first = new Node<Buffer*>();
   last = first;
 }
 
@@ -22,8 +22,7 @@ Buffer* ServerList::getBuffer(int server) {
 }
 
 void ServerList::push(Buffer* buffer) {
-  Node<Buffer*>* newNode = new Node<Buffer*>;
-  newNode->item = buffer;
+  Node<Buffer*>* newNode = new Node<Buffer*>(buffer);
   
   last->next = newNode;
   last = newNode;
