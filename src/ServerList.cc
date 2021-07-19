@@ -1,4 +1,3 @@
-#include <iostream>
 #include "ServerList.h"
 
 ServerList::ServerList() {
@@ -54,10 +53,10 @@ void ServerList::clear() {
   last = first;
 }
 
-void ServerList::print() {
+void ServerList::flushAll() {
   Node<Buffer*>* aux = first->next;
   while (aux != nullptr) {
-    if (!aux->item->isEmpty()) aux->item->print();
+    if (!aux->item->isEmpty()) aux->item->flush();
 
     aux = aux->next;
   }

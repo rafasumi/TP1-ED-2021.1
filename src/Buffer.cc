@@ -73,13 +73,15 @@ void Buffer::clear() {
   back = front;
 }
 
-void Buffer::print() {
-  if (size == 0) throw "Buffer::print: O buffer está vazio!";
+void Buffer::flush() {
+  if (size == 0) throw "Buffer::flush: O buffer está vazio!";
 
   Node<std::string>* aux = front->next;
   while (aux != nullptr) {
+    front->next = aux->next;
     std::cout << aux->item << std::endl;
-    aux = aux->next;
+    delete aux;
+    aux = front->next;
   }
 }
 

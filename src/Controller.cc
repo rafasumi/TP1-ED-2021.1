@@ -44,8 +44,7 @@ void Controller::erro(int server) {
   Buffer* buffer = servers.getBuffer(server);
 
   std::cout << "ERRO " << server << std::endl;
-  buffer->print();
-  buffer->clear();
+  buffer->flush();
 }
 
 void Controller::send() {
@@ -53,9 +52,9 @@ void Controller::send() {
 }
 
 void Controller::flush() {
-  if (!history.isEmpty()) history.print();
+  if (!history.isEmpty()) history.flush();
 
-  if (!servers.isEmpty()) servers.print();
+  if (!servers.isEmpty()) servers.flushAll();
 }
 
 void Controller::execute(std::string command) {

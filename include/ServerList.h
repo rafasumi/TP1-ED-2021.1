@@ -24,9 +24,9 @@ class ServerList {
     void popAll(Buffer* destiny);
     // Limpa a lista, liberando posições de memória alocadas e zerando o tamanho
     void clear();
-
-    // Chama a função print de todos os Buffers não-vazios
-    void print();
+    
+    // Chama a função 'flush' de todos os Buffers não-vazios
+    void flushAll();
 
   private:
     // Retorna um ponteiro para o Buffer do servidor 'server', caso exista

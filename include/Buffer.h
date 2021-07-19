@@ -25,9 +25,9 @@ class Buffer {
     void jump(int pos);
     // Limpa o Buffer, liberando aa posições de memória alocadas e zerando o tamanho
     void clear();
-
-    // Imprime o conteúdo do Buffer
-    void print();
+    
+    // Imprime o conteúdo do Buffer e os deleta em sequência
+    void flush();
   
   private:
     // Método auxiliar para retornar o Node na posição 'pos' do Buffer, caso seja válida
