@@ -20,7 +20,7 @@ int main(int argc, char const* argv[]) {
   } catch(char const* error) {
     inputFile.close();
     std::cerr << error << std::endl;
-    return -1;
+    return 1;
   }
 
   inputFile.close();
