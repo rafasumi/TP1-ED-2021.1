@@ -26,7 +26,9 @@ void Controller::info(int server, std::string data) {
 
 void Controller::warn(int server, int pos) {
   Buffer* buffer = servers.getBuffer(server);
-  buffer->jump(pos);
+  if (pos != 0) {
+    buffer->jump(pos);
+  }
 }
 
 void Controller::tran(int server1, int server2) {
@@ -36,15 +38,17 @@ void Controller::tran(int server1, int server2) {
   Buffer* buffer1 = servers.getBuffer(server1);
   Buffer* buffer2 = servers.getBuffer(server2);
 
-  buffer2->append(buffer1);
-  buffer1->clear();
+  if (!buffer1->isEmpty()) {
+    buffer2->append(buffer1);
+    buffer1->clear();
+  }
 }
 
 void Controller::erro(int server) {
   Buffer* buffer = servers.getBuffer(server);
 
   std::cout << "ERRO " << server << std::endl;
-  buffer->flush();
+  if (!buffer->isEmpty()) buffer->flush();
 }
 
 void Controller::send() {

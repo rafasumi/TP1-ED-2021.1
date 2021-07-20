@@ -83,6 +83,9 @@ void Buffer::flush() {
     delete aux;
     aux = front->next;
   }
+
+  size = 0;
+  back = front; 
 }
 
 Node<std::string>* Buffer::position(int pos) {
