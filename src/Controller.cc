@@ -26,22 +26,17 @@ void Controller::info(int server, std::string data) {
 
 void Controller::warn(int server, int pos) {
   Buffer* buffer = servers.getBuffer(server);
-  if (pos != 0) {
-    buffer->jump(pos);
-  }
+  
+  if (pos != 0) buffer->jump(pos);
 }
 
 void Controller::tran(int server1, int server2) {
-  if (server1 == server2) 
-    throw "Controller::tran: Impossível transferir de um servidor para ele mesmo!";
+  if (server1 == server2) return;
 
   Buffer* buffer1 = servers.getBuffer(server1);
   Buffer* buffer2 = servers.getBuffer(server2);
 
-  if (!buffer1->isEmpty()) {
-    buffer2->append(buffer1);
-    buffer1->clear();
-  }
+  if (!buffer1->isEmpty()) buffer2->append(buffer1);
 }
 
 void Controller::erro(int server) {
@@ -84,7 +79,7 @@ void Controller::execute(std::string command) {
     flush();
   }
   else {
-    throw "Controller::execute: Input inválido!";
+    return;
   }
 }
 

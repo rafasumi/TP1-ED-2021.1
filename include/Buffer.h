@@ -18,6 +18,7 @@ class Buffer {
     // Insere um novo dado ao final do Buffer
     void push(std::string data);
     // Concatena o conteúdo de um segundo Buffer ao final do Buffer atual
+    // O conteúdo do Buffer passado como parâmetro é removido
     void append(Buffer* buffer);
     // Retira o primeiro elemento do Buffer. Retorna o seu dado (string)
     std::string popFront();

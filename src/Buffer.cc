@@ -30,9 +30,14 @@ void Buffer::append(Buffer* buffer) {
 
   Node<std::string>* aux = buffer->front->next;
   while (aux != nullptr) {
+    buffer->front->next = aux->next;
     this->push(aux->item);
-    aux = aux->next;
+    delete aux;
+    aux = buffer->front->next;
   }
+
+  buffer->size = 0;
+  buffer->back = buffer->front;
 }
 
 std::string Buffer::popFront() {
