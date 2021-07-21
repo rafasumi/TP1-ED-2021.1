@@ -29,9 +29,11 @@ class ServerList {
     void flushAll();
 
   private:
-    // Retorna um ponteiro para o Buffer do servidor 'server', caso exista
+    // Obtém o Buffer que pertence ao servidor 'server', caso exista
+    // Retorna um ponteiro para o Buffer
     Buffer* getBuffer(int server);
-    // Retorna o Node que representa servidor 'server' na lista
+    // Obtém o Node que representa o servidor 'server' na lista 
+    // Retorna um ponteiro para o Node se o valor passado for válido
     Node<Buffer*>* getServer(int server);
 
     int size;

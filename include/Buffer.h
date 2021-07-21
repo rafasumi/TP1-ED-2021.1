@@ -20,7 +20,7 @@ class Buffer {
     // Concatena o conteúdo de um segundo Buffer ao final do Buffer atual
     // O conteúdo do Buffer passado como parâmetro é removido
     void append(Buffer* buffer);
-    // Retira o primeiro elemento do Buffer. Retorna o seu dado (string)
+    // Retira o primeiro elemento do Buffer. Retorna o dado do elemento removido
     std::string popFront();
     // Faz com que o elemento da posição 'pos' do Buffer passe a ser o novo primeiro elemento
     void jump(int pos);
