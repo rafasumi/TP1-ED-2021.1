@@ -64,6 +64,9 @@ void Buffer::jump(int pos) {
   Node<std::string>* aux = front->next;
   front->next = node;
   node->next = aux;
+
+  if (back == node) 
+    back = prev;
 }
 
 void Buffer::clear() {

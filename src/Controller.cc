@@ -2,15 +2,15 @@
 #include "Controller.h"
 
 Controller::Controller(int serverQty) {
-  if (serverQty <= 0) 
-    throw "Controller::Controller: Quantidade inválida de de servidores!";
+  if (serverQty < 0) 
+    throw "Controller::Controller: Quantidade inválida de servidores!";
   
   for (int i = 0; i < serverQty; i++) {
     Buffer* buf = new Buffer();
     servers.push(buf);
   }
 
-  args = new std::string[3];
+  args = new std::string[5];
 }
 
 Controller::~Controller() {
@@ -53,7 +53,7 @@ void Controller::send() {
 void Controller::flush() {
   if (!history.isEmpty()) history.flush();
 
-  if (!servers.isEmpty()) servers.flushAll();
+  servers.flushAll();
 }
 
 void Controller::execute(std::string command) {

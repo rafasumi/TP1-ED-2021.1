@@ -9,11 +9,11 @@ int main(int argc, char const* argv[]) {
   std::ifstream inputFile(argv[1]);
   std::string serverQty;
   std::string command;
-
-  getline (inputFile, serverQty);
-  Controller controller(std::stoi(serverQty));
   
   try {
+    getline (inputFile, serverQty);
+    Controller controller(std::stoi(serverQty));
+
     while (getline (inputFile, command)) {
       controller.execute(command);
     }
